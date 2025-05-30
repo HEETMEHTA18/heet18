@@ -1,0 +1,6 @@
+{
+  "devDependencies": {
+    "postcss-flexbugs-fixes": "^5.0.2",
+    "postcss-preset-env": "^10.2.0"
+  }
+}
