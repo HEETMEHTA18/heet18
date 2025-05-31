@@ -98,6 +98,8 @@ function TypewriterText({ text, className }) {
 // Navbar
 function Navbar() {
   const [activeSection, setActiveSection] = useState("home");
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  
   const navItems = [
     { name: "Home", id: "home" },
     { name: "About", id: "about" },
@@ -105,8 +107,10 @@ function Navbar() {
     { name: "Projects", id: "projects" },
     { name: "Contact", id: "contact" },
   ];
+
   const scrollToSection = (sectionId) => {
     setActiveSection(sectionId);
+    setIsMobileMenuOpen(false);
     const element = document.getElementById(sectionId);
     if (element) element.scrollIntoView({ behavior: 'smooth' });
   };
@@ -118,18 +122,73 @@ function Navbar() {
       transition={{ duration: 0.7, type: "spring", stiffness: 100 }}
       className="fixed top-0 left-0 right-0 z-50 bg-black/90 border-b border-gray-800"
     >
-      <div className="max-w-4xl mx-auto flex justify-center gap-8 py-4">
-        {navItems.map((item) => (
+      <div className="max-w-4xl mx-auto px-4">
+        <div className="flex justify-between items-center py-4">
+          {/* Mobile menu button */}
           <button
-            key={item.id}
-            onClick={() => scrollToSection(item.id)}
-            className={`px-2 py-1 capitalize transition-colors ${
-              activeSection === item.id ? "text-white font-bold" : "text-gray-400 hover:text-white"
-            }`}
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="md:hidden text-white p-2"
           >
-            {item.name}
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              {isMobileMenuOpen ? (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              ) : (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              )}
+            </svg>
           </button>
-        ))}
+
+          {/* Desktop menu */}
+          <div className="hidden md:flex justify-center gap-8">
+            {navItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => scrollToSection(item.id)}
+                className={`px-2 py-1 capitalize transition-colors ${
+                  activeSection === item.id ? "text-white font-bold" : "text-gray-400 hover:text-white"
+                }`}
+              >
+                {item.name}
+              </button>
+            ))}
+          </div>
+
+          {/* Mobile menu */}
+          <motion.div
+            initial={false}
+            animate={{ height: isMobileMenuOpen ? "auto" : 0 }}
+            className="md:hidden absolute top-full left-0 right-0 bg-black/95 overflow-hidden"
+          >
+            <div className="flex flex-col items-center py-4">
+              {navItems.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className={`w-full text-center px-4 py-2 capitalize transition-colors ${
+                    activeSection === item.id ? "text-white font-bold" : "text-gray-400 hover:text-white"
+                  }`}
+                >
+                  {item.name}
+                </button>
+              ))}
+            </div>
+          </motion.div>
+        </div>
       </div>
     </motion.nav>
   );
@@ -137,7 +196,7 @@ function Navbar() {
 
 function Section({ id, children }) {
   return (
-    <section id={id} className="max-w-3xl mx-auto px-4 py-24">
+    <section id={id} className="min-h-screen max-w-3xl mx-auto px-4 py-16 md:py-24">
       {children}
     </section>
   );
@@ -147,35 +206,37 @@ function Hero() {
   return (
     <Section id="home">
       <AnimatedBackground />
-      <motion.h1
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7 }}
-        className="text-4xl md:text-6xl font-bold text-center bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent"
-      >
-        Heet Mehta
-      </motion.h1>
-      <motion.p
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3, duration: 0.7 }}
-        className="mt-6 text-center text-gray-300 text-lg"
-      >
-        <TypewriterText text="Frontend Developer | Animation Artist | UI/UX Designer" className="" />
-      </motion.p>
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5, duration: 0.7 }}
-        className="flex justify-center gap-6 mt-8"
-      >
-        <a href="https://github.com/heetmehta18" target="_blank" rel="noopener noreferrer" className="text-2xl text-gray-400 hover:text-white">
-          <FaGithub />
-        </a>
-        <a href="https://linkedin.com/in/heetmehta18" target="_blank" rel="noopener noreferrer" className="text-2xl text-blue-400 hover:text-white">
-          <FaLinkedin />
-        </a>
-      </motion.div>
+      <div className="flex flex-col items-center justify-center min-h-[80vh]">
+        <motion.h1
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          className="text-4xl sm:text-5xl md:text-6xl font-bold text-center bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent"
+        >
+          Heet Mehta
+        </motion.h1>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3, duration: 0.7 }}
+          className="mt-6 text-center text-gray-300 text-base sm:text-lg px-4"
+        >
+          <TypewriterText text="Frontend Developer | Animation Artist | UI/UX Designer" className="" />
+        </motion.p>
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5, duration: 0.7 }}
+          className="flex justify-center gap-6 mt-8"
+        >
+          <a href="https://github.com/heetmehta18" target="_blank" rel="noopener noreferrer" className="text-2xl text-gray-400 hover:text-white transition-colors">
+            <FaGithub />
+          </a>
+          <a href="https://linkedin.com/in/heetmehta18" target="_blank" rel="noopener noreferrer" className="text-2xl text-blue-400 hover:text-white transition-colors">
+            <FaLinkedin />
+          </a>
+        </motion.div>
+      </div>
     </Section>
   );
 }
@@ -187,36 +248,26 @@ function About() {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="text-3xl font-semibold mb-6 text-white"
+        className="text-2xl sm:text-3xl font-semibold mb-6 text-white"
       >
         About Me
       </motion.h2>
-      <motion.p
-        className="text-gray-300 mb-4"
+      <motion.div
+        className="space-y-4 text-gray-300"
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
       >
-        Over the past few years, I've completed a variety of challenging projects, from interactive simulations to real-world web apps. My journey began with online courses and hands-on experimentation, and I've consistently sought out new resources to deepen my understanding of frontend technologies and animation principles.
-      </motion.p>
-      <motion.p
-        className="text-gray-300 mb-4"
-        initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ delay: 0.1 }}
-      >
-        I've completed several certifications and followed tutorials from platforms like freeCodeCamp, Coursera, and YouTube. Each project I build is an opportunity to apply what I've learned and push my skills further.
-      </motion.p>
-      <motion.p
-        className="text-gray-300"
-        initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ delay: 0.2 }}
-      >
-        I enjoy experimenting with animations, micro-interactions, and creative UI/UX solutions. My goal is to craft digital experiences that are not only functional but also delightful and memorable.
-      </motion.p>
+        <p className="text-base sm:text-lg">
+          Over the past few years, I've completed a variety of challenging projects, from interactive simulations to real-world web apps. My journey began with online courses and hands-on experimentation, and I've consistently sought out new resources to deepen my understanding of frontend technologies and animation principles.
+        </p>
+        <p className="text-base sm:text-lg">
+          I've completed several certifications and followed tutorials from platforms like freeCodeCamp, Coursera, and YouTube. Each project I build is an opportunity to apply what I've learned and push my skills further.
+        </p>
+        <p className="text-base sm:text-lg">
+          I enjoy experimenting with animations, micro-interactions, and creative UI/UX solutions. My goal is to craft digital experiences that are not only functional but also delightful and memorable.
+        </p>
+      </motion.div>
     </Section>
   );
 }
@@ -232,45 +283,46 @@ function Skills() {
     { name: "Three.js", level: 70 },
     { name: "Figma", level: 70 },
   ];
+  
   return (
     <Section id="skills">
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="text-3xl font-semibold mb-6 text-white"
+        className="text-2xl sm:text-3xl font-semibold mb-6 text-white"
       >
         Skills
       </motion.h2>
       <motion.p
-        className="text-gray-400 mb-4"
+        className="text-gray-400 mb-8 text-base sm:text-lg"
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
       >
-        My technical foundation comes from a mix of formal courses, online tutorials, and real-world project experience. I believe in continuous learning and regularly update my skills by following the latest trends and best practices in frontend development.
+        Here are some of the technologies I work with:
       </motion.p>
-      <div className="space-y-4">
-        {skills.map((skill, i) => (
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        {skills.map((skill, index) => (
           <motion.div
             key={skill.name}
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: i * 0.05 }}
+            transition={{ delay: index * 0.1 }}
+            className="bg-gray-800/50 p-4 rounded-lg"
           >
-            <div className="flex justify-between text-gray-200 text-sm mb-1">
-              <span>{skill.name}</span>
-              <span>{skill.level}%</span>
+            <div className="flex justify-between mb-2">
+              <span className="text-white">{skill.name}</span>
+              <span className="text-gray-400">{skill.level}%</span>
             </div>
-            <div className="w-full h-2 bg-gray-800 rounded">
+            <div className="w-full bg-gray-700 rounded-full h-2">
               <motion.div
-                className="h-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded"
-                style={{ width: `${skill.level}%` }}
                 initial={{ width: 0 }}
                 whileInView={{ width: `${skill.level}%` }}
                 viewport={{ once: true }}
-                transition={{ duration: 1 }}
+                transition={{ duration: 1, delay: index * 0.1 }}
+                className="h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full"
               />
             </div>
           </motion.div>
@@ -283,63 +335,65 @@ function Skills() {
 function Projects() {
   const projects = [
     {
-      title: "solar_system_project",
-      description: "A simulation of the solar system, visualizing orbits of planets and their moons. This project was inspired by my fascination with astronomy and built after studying orbital mechanics through online resources and coding tutorials. I completed this project as a personal challenge to improve my JavaScript and animation skills.",
-      link: "https://github.com/heetmehta18/solar_system_project",
+      title: "Project 1",
+      description: "A responsive web application built with React and Tailwind CSS.",
+      technologies: ["React", "Tailwind CSS", "Framer Motion"],
+      link: "#"
     },
     {
-      title: "weatherSphere",
-      description: "A weather visualization app that displays real-time weather data with engaging graphics and animations. I learned to work with APIs and asynchronous JavaScript while building this project, referencing documentation and community forums to overcome challenges.",
-      link: "https://github.com/heetmehta18/weatherSphere",
+      title: "Project 2",
+      description: "An interactive animation project using Three.js and GSAP.",
+      technologies: ["Three.js", "GSAP", "JavaScript"],
+      link: "#"
     },
     {
-      title: "HEETMEHTA18.github.io",
-      description: "My animated portfolio website built with React, Tailwind CSS, and Framer Motion. I designed and developed this site from scratch, iterating based on feedback and best practices in modern web design.",
-      link: "https://heetmehta18.github.io/",
-    },
-    {
-      title: "Smart-Traffic-Light-System-With-Adaptive-Siganal",
-      description: "A smart traffic light system that adapts signal timings based on real-time traffic data. I completed this as part of a group project, collaborating with peers and using GitHub for version control. This experience taught me the importance of teamwork and clear communication.",
-      link: "https://github.com/heetmehta18/Smart-Traffic-Light-System-With-Adaptive-Siganal",
-    },
-    {
-      title: "Sasta-Shark-Tank",
-      description: "A fun web app inspired by Shark Tank, where users can pitch quirky startup ideas. This project helped me improve my React skills and learn about state management in larger applications.",
-      link: "https://github.com/heetmehta18/Sasta-Shark-Tank",
-    },
+      title: "Project 3",
+      description: "A modern UI/UX design implementation with micro-interactions.",
+      technologies: ["Figma", "React", "Framer Motion"],
+      link: "#"
+    }
   ];
+
   return (
     <Section id="projects">
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="text-3xl font-semibold mb-6 text-white"
+        className="text-2xl sm:text-3xl font-semibold mb-6 text-white"
       >
         Projects
       </motion.h2>
-      <div className="space-y-6">
-        {projects.map((p, i) => (
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {projects.map((project, index) => (
           <motion.div
-            key={p.title}
+            key={project.title}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: i * 0.08 }}
-            className="bg-gray-900 rounded-lg p-5 border border-gray-800"
+            transition={{ delay: index * 0.1 }}
+            className="bg-gray-800/50 rounded-lg overflow-hidden hover:bg-gray-800/70 transition-colors"
           >
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-              <div>
-                <div className="text-lg font-semibold text-blue-300">{p.title}</div>
-                <div className="text-gray-400 text-sm">{p.description}</div>
+            <div className="p-6">
+              <h3 className="text-xl font-semibold text-white mb-2">{project.title}</h3>
+              <p className="text-gray-300 mb-4">{project.description}</p>
+              <div className="flex flex-wrap gap-2 mb-4">
+                {project.technologies.map(tech => (
+                  <span
+                    key={tech}
+                    className="px-2 py-1 text-sm bg-gray-700 text-gray-300 rounded"
+                  >
+                    {tech}
+                  </span>
+                ))}
               </div>
               <a
-                href={p.link}
+                href={project.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-2 md:mt-0 text-sm text-blue-400 hover:underline"
+                className="inline-block px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
               >
-                View
+                View Project
               </a>
             </div>
           </motion.div>
@@ -356,55 +410,76 @@ function Contact() {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="text-3xl font-semibold mb-6 text-white"
+        className="text-2xl sm:text-3xl font-semibold mb-6 text-white"
       >
-        Get In Touch
+        Contact
       </motion.h2>
-      <motion.p
-        className="text-gray-300 mb-6"
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
+        className="max-w-lg mx-auto"
       >
-        Whether you have a project in mind, want to collaborate, or just wish to connect, feel free to reach out. I'm always open to discussing new opportunities and sharing what I've learned along the way.
-      </motion.p>
-      <div className="space-y-2 mb-4">
-        <div className="text-gray-400 text-sm">Email</div>
-        <div className="text-white font-medium">heetmehta18125@gmail.com</div>
-        <div className="text-gray-400 text-sm mt-4">Phone</div>
-        <div className="text-white font-medium">+91 96645 17017</div>
-      </div>
-      <div className="flex gap-4 mt-6">
-        <a href="https://github.com/heetmehta18" target="_blank" rel="noopener noreferrer" className="text-2xl text-gray-400 hover:text-white">
-          <FaGithub />
-        </a>
-        <a href="https://linkedin.com/in/heetmehta18" target="_blank" rel="noopener noreferrer" className="text-2xl text-blue-400 hover:text-white">
-          <FaLinkedin />
-        </a>
-        <a href="https://instagram.com/heetmehta18" target="_blank" rel="noopener noreferrer" className="text-2xl text-pink-400 hover:text-white">
-          <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12 2.163c3.204 0 3.584.012 4.849.07 1.366.062 2.633.334 3.608 1.308.974.974 1.246 2.241 1.308 3.608.058 1.265.069 1.645.069 4.849s-.011 3.584-.069 4.849c-.062 1.366-.334 2.633-1.308 3.608-.974.974-2.241 1.246-3.608 1.308-1.265.058-1.645.069-4.849.069s-3.584-.011-4.849-.069c-1.366-.062-2.633-.334-3.608-1.308-.974-.974-1.246-2.241-1.308-3.608C2.175 15.646 2.163 15.266 2.163 12s.012-3.584.07-4.849c.062-1.366.334-2.633 1.308-3.608.974-.974 2.241-1.246 3.608-1.308C8.416 2.175 8.796 2.163 12 2.163zm0-2.163C8.741 0 8.332.013 7.052.072 5.77.131 4.672.355 3.678 1.349c-.994.994-1.218 2.092-1.277 3.374C2.013 5.668 2 6.077 2 12c0 5.923.013 6.332.072 7.613.059 1.282.283 2.38 1.277 3.374.994.994 2.092 1.218 3.374 1.277C8.332 23.987 8.741 24 12 24s3.668-.013 4.948-.072c1.282-.059 2.38-.283 3.374-1.277.994-.994 1.218-2.092 1.277-3.374.059-1.281.072-1.69.072-7.613 0-5.923-.013-6.332-.072-7.613-.059-1.282-.283-2.38-1.277-3.374-.994-.994-2.092-1.218-3.374-1.277C15.668.013 15.259 0 12 0zm0 5.838A6.162 6.162 0 0 0 5.838 12 6.162 6.162 0 0 0 12 18.162 6.162 6.162 0 0 0 18.162 12 6.162 6.162 0 0 0 12 5.838zm0 10.162A3.999 3.999 0 1 1 16 12a3.999 3.999 0 0 1-4 4zm6.406-11.845a1.44 1.44 0 1 1-2.88 0 1.44 1.44 0 0 1 2.88 0z"/>
-          </svg>
-        </a>
-      </div>
-      <div className="text-center text-gray-600 mt-8 text-xs">
-        © Copyright 2024 Design by Heet
-      </div>
+        <form className="space-y-6">
+          <div>
+            <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
+              Name
+            </label>
+            <input
+              type="text"
+              id="name"
+              className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Your name"
+            />
+          </div>
+          <div>
+            <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
+              Email
+            </label>
+            <input
+              type="email"
+              id="email"
+              className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="your.email@example.com"
+            />
+          </div>
+          <div>
+            <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
+              Message
+            </label>
+            <textarea
+              id="message"
+              rows="4"
+              className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Your message"
+            ></textarea>
+          </div>
+          <button
+            type="submit"
+            className="w-full px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+          >
+            Send Message
+          </button>
+        </form>
+      </motion.div>
     </Section>
   );
 }
 
 export default function App() {
   return (
-    <div className="bg-black min-h-screen text-white font-sans">
+    <div className="min-h-screen bg-black text-white overflow-x-hidden">
       <Navbar />
-      <main className="pt-20">
+      <main className="relative">
         <Hero />
         <About />
         <Skills />
         <Projects />
         <Contact />
       </main>
+      <footer className="py-6 text-center text-gray-600 text-sm">
+        <p>© {new Date().getFullYear()} Heet Mehta. All rights reserved.</p>
+      </footer>
     </div>
   );
 } 
