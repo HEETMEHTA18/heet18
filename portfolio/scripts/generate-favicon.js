@@ -1,0 +1,42 @@
+const fs = require('fs');
+const path = require('path');
+const sharp = require('sharp');
+
+// SVG content for the favicon
+const svgContent = `
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="16" cy="16" r="16" fill="#4F46E5"/>
+  <circle cx="16" cy="12" r="6" fill="#F3F4F6"/>
+  <path d="M16 18C20 18 24 20 24 24V32H8V24C8 20 12 18 16 18Z" fill="#F3F4F6"/>
+  <circle cx="14" cy="10" r="1" fill="#1F2937"/>
+  <circle cx="18" cy="10" r="1" fill="#1F2937"/>
+  <path d="M14 14C14 14 15 15 16 15C17 15 18 14 18 14" stroke="#1F2937" stroke-width="1.5" stroke-linecap="round"/>
+</svg>
+`;
+
+// Create a temporary SVG file
+const tempSvgPath = path.join(__dirname, 'temp-favicon.svg');
+fs.writeFileSync(tempSvgPath, svgContent);
+
+// Convert SVG to PNG and then to ICO
+sharp(tempSvgPath)
+  .resize(32, 32)
+  .toFormat('png')
+  .toBuffer()
+  .then((pngBuffer) => {
+    // Save as favicon.ico in the public directory
+    const faviconPath = path.join(__dirname, '..', 'public', 'favicon.ico');
+    fs.writeFileSync(faviconPath, pngBuffer);
+    
+    // Clean up temporary SVG file
+    fs.unlinkSync(tempSvgPath);
+    
+    console.log('Favicon generated successfully!');
+  })
+  .catch((err) => {
+    console.error('Error generating favicon:', err);
+    // Clean up temporary SVG file
+    if (fs.existsSync(tempSvgPath)) {
+      fs.unlinkSync(tempSvgPath);
+    }
+  }); 
