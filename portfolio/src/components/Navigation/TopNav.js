@@ -14,7 +14,7 @@ function TopNav() {
     >
       <div className="max-w-3xl mx-auto flex justify-between items-center">
         {/* Your Name */}
-        <span className="text-lg font-bold text-white">
+        <span className="text-lg font-bold text-gray-800 dark:text-white">
           Heet Mehta
         </span>
 
