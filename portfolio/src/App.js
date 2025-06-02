@@ -146,7 +146,7 @@ function AppContent() {
   const { theme } = useTheme();
 
   return (
-    <div className={`min-h-screen ${theme === 'dark' ? 'bg-black' : 'bg-gray-100'} font-sans`}>
+    <div className={`min-h-screen ${theme === 'dark' ? 'bg-black' : 'bg-gray-100'} font-sans ${theme}`}>
       <ScrollProgress />
       <TopNav />
       <Suspense fallback={<LoadingSpinner />}>
