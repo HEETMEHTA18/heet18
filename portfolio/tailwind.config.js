@@ -6,9 +6,16 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Roboto', 'Lato', 'sans-serif'],
-        serif: ['Roboto', 'Lato', 'serif'], // Or a different serif font if needed
-        // Add other font families if necessary
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+        display: ['Lato', 'system-ui', 'sans-serif'],
+        mono: ['Roboto Mono', 'monospace'],
+      },
+      fontWeight: {
+        light: 300,
+        normal: 400,
+        medium: 500,
+        semibold: 600,
+        bold: 700,
       },
     },
   },
