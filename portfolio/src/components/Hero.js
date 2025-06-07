@@ -55,7 +55,7 @@ function Hero() {
         </motion.h1>
         <TypewriterText
           text="Frontend Developer | Animation Artist | UI/UX Designer"
-          className="mt-4 text-gray-300 text-base sm:text-lg px-4"
+          className="mt-4 text-gray-700 dark:text-gray-300 text-base sm:text-lg px-4"
         />
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
@@ -94,7 +94,7 @@ function Hero() {
             href="https://github.com/heetmehta18" 
             target="_blank" 
             rel="noopener noreferrer" 
-            className="text-2xl text-gray-400 hover:text-white transition-colors"
+            className="text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-white transition-colors text-2xl"
           >
             <FaGithub />
           </a>
@@ -102,7 +102,7 @@ function Hero() {
             href="https://linkedin.com/in/heetmehta18" 
             target="_blank" 
             rel="noopener noreferrer" 
-            className="text-2xl text-blue-400 hover:text-white transition-colors"
+            className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-white transition-colors text-2xl"
           >
             <FaLinkedin />
           </a>

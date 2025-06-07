@@ -35,19 +35,19 @@ function Contact() {
               </svg>
               <div>
                 <p className="text-sm text-gray-400">Email</p>
-                <h5 className="text-white">your.email@example.com</h5>
+                <h5 className="text-white">heetmehta18125@gmail.com</h5>
               </div>
-              <a href="mailto:your.email@example.com" className="ml-auto text-purple-400 hover:text-white transition-colors">Write Me</a>
+              <a href="mailto:heetmehta18125@gmail.com" className="ml-auto text-purple-400 hover:text-white transition-colors">Write Me</a>
             </div>
             <div className="flex items-center space-x-4 bg-gray-800/50 p-4 rounded-lg">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-purple-400" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12.043 0C5.39 0 .045 5.344.045 12s5.345 12 12 12 12-5.344 12-12-5.345-12-12-12zm2.326 17.236c-.105.055-.25.085-.414.085-.164 0-.307-.029-.413-.085-.106-.056-.21-.13-.313-.224-.105-.093-.2-.202-.289-.32-.09-.116-.169-.255-.236-.414-.066-.159-.115-.339-.146-.54-.03-.2-.046-.388-.046-.569 0-.236.052-.45.156-.641.105-.19.25-.333.436-.437.184-.105.379-.157.586-.157.105 0 .207.019.309.058.103.04.193.096.272.167.08.07.148.15.206.239.059.088.095.174.109.256l.012.045c.023.078.042.16.058.248.016.088.025.169.025.243 0 .04-.003.06-.009.069l-.01.038c-.013.038-.043.074-.089.106-.045.033-.115.075-.206.125-.09.049-.184.102-.283.158-.1.057-.185.1-.256.13-.07.03-.136.049-.199.058-.064.009-.12.014-.167.014zm.975 1.434c.133.2.213.318.24.355.029.036.059.08.09.13.03.05.054.088.072.113.018.025.048.062.09.112.042.05.062.086.062.105 0 .03-.006.054-.018.072-.012.019-.039.03-.078.03-.039 0-.079-.006-.117-.018-.039-.012-.072-.029-.099-.045-.029-.019-.063-.049-.104-.093-.04-.045-.075-.086-.104-.122a1.87 1.87 0 0 0-.183-.22L14 18.076l-.37-.542c-.152-.222-.23-.335-.234-.339-.012-.012-.022-.015-.03-.015a.03.03 0 0 0-.021.007c-.006.004-.008.015-.005.032.004.018.03.06.079.128.05.069.095.136.136.203zM12.044 2.103c-5.414 0-9.804 4.39-9.804 9.804s4.39 9.804 9.804 9.804 9.804-4.39 9.804-9.804-4.39-9.804-9.804-9.804zm-.014 16.448c-.987 0-1.9-.25-2.744-.743-.845-.493-1.529-1.177-2.053-2.053-.523-.876-.785-1.789-.785-2.735 0-.716.165-1.378.495-1.985.33-.607.763-1.134 1.299-1.58.536-.447 1.137-.792 1.803-1.036.666-.244 1.368-.366 2.107-.366.716 0 1.377.164 1.984.494.607.33 1.133.763 1.579 1.299.447.536.792 1.137 1.036 1.802.244.666.366 1.368.366 2.107 0 .987-.25 1.9-.742 2.744-.493.845-1.177 1.529-2.053 2.053-.876.523-1.789.785-2.736.785z"/>
+                <path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.95.684l1.19 3.292a1 1 0 01-.174 1.043l-1.611 1.612a12.003 12.003 0 004.99 4.99l1.612-1.611a1 1 0 011.043-.174l3.292 1.19a1 1 0 01.684.95V19a2 2 0 01-2 2H5a2 2 0 01-2-2V5z" />
               </svg>
               <div>
-                <p className="text-sm text-gray-400">Whatsapp</p>
-                <h5 className="text-white">+123 456 7890</h5>
+                <p className="text-sm text-gray-400">Call</p>
+                <h5 className="text-white">+91 9999999999</h5>
               </div>
-              <a href="https://wa.me/1234567890" target="_blank" rel="noopener noreferrer" className="ml-auto text-purple-400 hover:text-white transition-colors">Write Me</a>
+              <a href="tel:+919999999999" target="_blank" rel="noopener noreferrer" className="ml-auto text-purple-400 hover:text-white transition-colors">Call Me</a>
             </div>
             <div className="flex items-center space-x-4 bg-gray-800/50 p-4 rounded-lg">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-purple-400" fill="currentColor" viewBox="0 0 24 24">
@@ -89,7 +89,7 @@ function Contact() {
                 type="email"
                 id="email"
                 className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
-                placeholder="your.email@example.com"
+                placeholder="heetmehta18125@gmail.com"
               />
             </div>
             <div>
