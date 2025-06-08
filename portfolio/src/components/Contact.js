@@ -89,7 +89,7 @@ function Contact() {
                 type="email"
                 id="email"
                 className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
-                placeholder="heetmehta18125@gmail.com"
+                placeholder="random.email123@example.com"
               />
             </div>
             <div>
