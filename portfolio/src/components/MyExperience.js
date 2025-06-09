@@ -3,21 +3,17 @@ import { motion } from 'framer-motion';
 
 function MyExperience() {
   const frontendSkills = [
-    { name: "HTML", level: "Advanced" },
-    { name: "CSS/SCSS", level: "Advanced" },
-    { name: "Javascript", level: "Advanced" },
-    { name: "Bootstrap", level: "Intermediate" },
+    { name: "HTML", level: "Intermediate" },
+    { name: "CSS", level: "Intermediate" },
+    { name: "C/C++", level: "Basics" },
     { name: "Git", level: "Advanced" },
-    { name: "React", level: "Advanced" },
+    { name: "React", level: "Learning " },
   ];
 
   const backendSkills = [
-    { name: "Node JS", level: "Advanced" },
-    { name: "Python", level: "Advanced" },
-    { name: "MySQL", level: "Advanced" },
-    { name: "PHP", level: "Intermediate" },
-    { name: "Firebase", level: "Advanced" },
-    { name: "Mongo DB", level: "Advanced" },
+    { name: "Node JS", level: "Basics" },
+    { name: "Python", level: "Intermediate" },
+    { name: "Mongo DB", level: "Learning" },
   ];
 
   return (
