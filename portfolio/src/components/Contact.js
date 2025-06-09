@@ -35,7 +35,7 @@ function Contact() {
               </svg>
               <div>
                 <p className="text-sm text-gray-400">Email</p>
-                <h5 className="text-white">heetmehta18125@gmail.com</h5>
+                <h5 className="text-white">username_@gmail.com</h5>
               </div>
               <a href="mailto:heetmehta18125@gmail.com" className="ml-auto text-purple-400 hover:text-white transition-colors">Write Me</a>
             </div>
@@ -45,19 +45,19 @@ function Contact() {
               </svg>
               <div>
                 <p className="text-sm text-gray-400">Call</p>
-                <h5 className="text-white">+91 9999999999</h5>
+                <h5 className="text-white">+91 000000000</h5>
               </div>
-              <a href="tel:+919999999999" target="_blank" rel="noopener noreferrer" className="ml-auto text-purple-400 hover:text-white transition-colors">Call Me</a>
+              <a href="tel:+9664517017" target="_blank" rel="noopener noreferrer" className="ml-auto text-purple-400 hover:text-white transition-colors">Call Me</a>
             </div>
             <div className="flex items-center space-x-4 bg-gray-800/50 p-4 rounded-lg">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-purple-400" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045C7.145 8.317 4.071 6.683 1.937 3.17c-1.1.823-1.741 1.98-1.741 3.308 0 1.15.51 2.182 1.339 2.782-.88-.029-1.71-.268-2.43-.641-.015 3.008 2.22 5.507 5.101 6.07-.67.188-1.372.291-2.09.291-.51 0-1.009-.06-1.49-.144.817 2.558 3.178 4.425 5.997 4.465 2.917 2.27 6.596 3.612 10.551 3.612 1.209 0 1.901-.056 2.794-.139-.941-.751-1.85-1.698-2.621-2.775z"/>
               </svg>
               <div>
-                <p className="text-sm text-gray-400">Twitter</p>
-                <h5 className="text-white">yourtwitterhandle</h5>
+                <p className="text-sm text-gray-400">Instagram</p>
+                <h5 className="text-white">username</h5>
               </div>
-              <a href="https://twitter.com/yourtwitterhandle" target="_blank" rel="noopener noreferrer" className="ml-auto text-purple-400 hover:text-white transition-colors">Write Me</a>
+              <a href="https://instagram.com/heet._.18" target="_blank" rel="noopener noreferrer" className="ml-auto text-purple-400 hover:text-white transition-colors">Write Me</a>
             </div>
           </div>
         </motion.div>
