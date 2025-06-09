@@ -43,8 +43,8 @@ function About() {
                 </svg>
               </div>
               <h3 className="text-sm font-semibold text-gray-800 dark:text-white">Experience</h3>
-              <p className="text-xs text-gray-600 dark:text-gray-400">X+ Years Working</p>
-            </motion.div>
+              <p className="text-xs text-gray-600 dark:text-gray-400">Learning Technologies</p>
+               </motion.div>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -58,7 +58,7 @@ function About() {
                 </svg>
               </div>
               <h3 className="text-sm font-semibold text-gray-800 dark:text-white">Completed</h3>
-              <p className="text-xs text-gray-600 dark:text-gray-400">Y+ Projects</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400">2+ Projects</p>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -72,7 +72,7 @@ function About() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 5.636l-3.536 3.536m0 0a5 5 0 11-7.072 7.072m7.072-7.072L5.636 18.364m0 0L12 12m0 0l7.072 7.072M12 12L5.636 5.636" />
                 </svg>
               </div>
-              <h3 className="text-sm font-semibold text-gray-800 dark:text-white">Support</h3>
+              <h3 className="text-sm font-semibold text-gray-800 dark:text-white">Contact</h3>
               <p className="text-xs text-gray-600 dark:text-gray-400">Online 24/7</p>
             </motion.div>
           </div>
@@ -82,7 +82,7 @@ function About() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            Frontend Developer. I create web pages with UI / UX user Interfaces, I have years of experience and many clients are happy with the work I did.
+            Hi, I'm Heet Mehta : A passionate developer with a keen interest in building smart, real-world tech solutions. From IoT innovations to interactive web apps, I love turning ideas into impactful digital experiences. Always curious, always learning
           </motion.p>
           <motion.button
             initial={{ opacity: 0, y: 10 }}
@@ -91,6 +91,7 @@ function About() {
             className="px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
           >
             Contact Me
+            
           </motion.button>
         </div>
       </div>
