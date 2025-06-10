@@ -12,7 +12,7 @@ function MyExperience() {
 
   const backendSkills = [
     { name: "Node JS", level: "Basics" },
-    { name: "Python", level: "Intermediate" },
+    { name: "Python", level: "Basics" },
     { name: "Mongo DB", level: "Learning" },
   ];
 
