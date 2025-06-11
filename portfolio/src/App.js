@@ -10,8 +10,6 @@ const MyExperience = lazy(() => import('./components/MyExperience'));
 const Projects = lazy(() => import('./components/Projects'));
 const Contact = lazy(() => import('./components/Contact'));
 
-// Social Icons
-
 // Scroll Progress Bar
 function ScrollProgress() {
   const { scrollYProgress } = useScroll();
