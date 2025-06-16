@@ -2,6 +2,7 @@ import React, { useState, lazy, Suspense } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
 import { ThemeProvider, useTheme } from './contexts/ThemeContext';
 import TopNav from './components/Navigation/TopNav';
+import Footer from './components/Footer';
 
 // Lazy load components
 const Hero = lazy(() => import('./components/Hero'));
@@ -155,6 +156,7 @@ function AppContent() {
         <Contact />
       </Suspense>
       <BottomNavigation />
+      <Footer /> {/* Add Footer here */}
     </div>
   );
 }
