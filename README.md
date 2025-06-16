@@ -62,6 +62,3 @@ This will create a `build` folder with the production-ready files.
 
 Add your contact information here (e.g., email, links to social media).
 
-## License
-
-Specify the license for your project here (e.g., MIT, Apache 2.0).
