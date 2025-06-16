@@ -1,4 +1,4 @@
-import React, { useState, lazy, Suspense } from "react";
+import React, { useState, lazy, Suspense, useRef } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
 import { ThemeProvider, useTheme } from './contexts/ThemeContext';
 import TopNav from './components/Navigation/TopNav';
@@ -90,6 +90,8 @@ function Navbar() {
 // Bottom Navigation
 function BottomNavigation() {
   const [activeSection, setActiveSection] = useState("home");
+  const [indicatorProps, setIndicatorProps] = useState({ left: 0, width: 0 });
+  const btnRefs = useRef({}); // <-- useRef here!
 
   const navItems = [
     { name: "Home", id: "home", icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg> }, // Home Icon
@@ -99,27 +101,52 @@ function BottomNavigation() {
     { name: "Contact", id: "contact", icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-1 13a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h12a2 2 0 012 2v15z" /></svg> }, // Contact Icon (Envelope)
   ];
 
+  // Update indicator position when activeSection changes
+  React.useEffect(() => {
+    const ref = btnRefs.current[activeSection];
+    if (ref && ref.current) {
+      setIndicatorProps({
+        left: ref.current.offsetLeft,
+        width: ref.current.offsetWidth,
+      });
+    }
+  }, [activeSection]);
+
   const scrollToSection = (sectionId) => {
     setActiveSection(sectionId);
     const element = document.getElementById(sectionId);
     if (element) element.scrollIntoView({ behavior: 'smooth' });
   };
 
-  // Optional: Add logic to update active section based on scroll position later
-
   return (
     <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 bg-gray-900/90 backdrop-blur-sm rounded-full border border-gray-800 px-6 py-3">
-      <div className="flex justify-around items-center h-full w-full">
-        {navItems.map((item) => (
-          <button
-            key={item.id}
-            onClick={() => scrollToSection(item.id)}
-            className={`flex flex-col items-center text-xs transition-colors px-4 py-2 rounded-full ${activeSection === item.id ? "text-white bg-purple-600 shadow-lg shadow-purple-600/50" : "text-gray-400 hover:text-white"}`}
-          >
-            <span className="mb-1">{item.icon}</span>
-            {/* Removed text labels for icons */}
-          </button>
-        ))}
+      <div className="relative flex justify-around items-center h-full w-full">
+        {/* Animated indicator */}
+        <motion.div
+          className="absolute top-1/2 left-0 h-12 bg-purple-600/90 rounded-full shadow-lg shadow-purple-600/40 -translate-y-1/2"
+          animate={{
+            width: indicatorProps.width,
+            left: indicatorProps.left,
+          }}
+          transition={{ type: "spring", stiffness: 400, damping: 30 }}
+        />
+        {navItems.map((item) => {
+          if (!btnRefs.current[item.id]) btnRefs.current[item.id] = React.createRef();
+          return (
+            <button
+              key={item.id}
+              ref={btnRefs.current[item.id]}
+              onClick={() => scrollToSection(item.id)}
+              className={`relative flex flex-col items-center text-xs transition-colors px-4 py-2 rounded-full z-10 ${
+                activeSection === item.id
+                  ? "text-white"
+                  : "text-gray-400 hover:text-white"
+              }`}
+            >
+              <span className="mb-1">{item.icon}</span>
+            </button>
+          );
+        })}
       </div>
     </div>
   );
@@ -132,6 +159,7 @@ function Section({ id, children }) {
     </section>
   );
 }
+
 
 // Loading component
 const LoadingSpinner = () => (
