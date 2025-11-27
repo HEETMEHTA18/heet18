@@ -1,7 +1,34 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
+import emailjs from '@emailjs/browser';
 
 function Contact() {
+  const form = useRef();
+  const [status, setStatus] = useState('');
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+    setStatus('sending');
+
+    // REPLACE THESE WITH YOUR ACTUAL EMAILJS CREDENTIALS
+    // Sign up at https://www.emailjs.com/
+    // Create a service and a template
+    // Get your Service ID, Template ID, and Public Key
+    const SERVICE_ID = 'YOUR_SERVICE_ID';
+    const TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
+    const PUBLIC_KEY = 'YOUR_PUBLIC_KEY';
+
+    emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form.current, PUBLIC_KEY)
+      .then((result) => {
+        console.log(result.text);
+        setStatus('success');
+        form.current.reset();
+      }, (error) => {
+        console.log(error.text);
+        setStatus('error');
+      });
+  };
+
   return (
     <section id="contact" className="min-h-screen max-w-3xl mx-auto px-4 py-16 md:py-24">
       <motion.h2
@@ -35,9 +62,9 @@ function Contact() {
               </svg>
               <div>
                 <p className="text-sm text-gray-400">Email</p>
-                <h5 className="text-white">username_@gmail.com</h5>
+                <h5 className="text-white">random@example.com</h5>
               </div>
-              <a href="mailto:heetmehta18125@gmail.com" className="ml-auto text-purple-400 hover:text-white transition-colors">Write Me</a>
+              <a href="mailto:random@example.com" className="ml-auto text-purple-400 hover:text-white transition-colors">Write Me</a>
             </div>
             <div className="flex items-center space-x-4 bg-gray-800/50 p-4 rounded-lg">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-purple-400" fill="currentColor" viewBox="0 0 24 24">
@@ -45,19 +72,19 @@ function Contact() {
               </svg>
               <div>
                 <p className="text-sm text-gray-400">Call</p>
-                <h5 className="text-white">+91 000000000</h5>
+                <h5 className="text-white">+91 12345 67890</h5>
               </div>
-              <a href="tel:+9664517017" target="_blank" rel="noopener noreferrer" className="ml-auto text-purple-400 hover:text-white transition-colors">Call Me</a>
+              <a href="tel:+911234567890" target="_blank" rel="noopener noreferrer" className="ml-auto text-purple-400 hover:text-white transition-colors">Call Me</a>
             </div>
             <div className="flex items-center space-x-4 bg-gray-800/50 p-4 rounded-lg">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-purple-400" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045C7.145 8.317 4.071 6.683 1.937 3.17c-1.1.823-1.741 1.98-1.741 3.308 0 1.15.51 2.182 1.339 2.782-.88-.029-1.71-.268-2.43-.641-.015 3.008 2.22 5.507 5.101 6.07-.67.188-1.372.291-2.09.291-.51 0-1.009-.06-1.49-.144.817 2.558 3.178 4.425 5.997 4.465 2.917 2.27 6.596 3.612 10.551 3.612 1.209 0 1.901-.056 2.794-.139-.941-.751-1.85-1.698-2.621-2.775z"/>
+                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045C7.145 8.317 4.071 6.683 1.937 3.17c-1.1.823-1.741 1.98-1.741 3.308 0 1.15.51 2.182 1.339 2.782-.88-.029-1.71-.268-2.43-.641-.015 3.008 2.22 5.507 5.101 6.07-.67.188-1.372.291-2.09.291-.51 0-1.009-.06-1.49-.144.817 2.558 3.178 4.425 5.997 4.465 2.917 2.27 6.596 3.612 10.551 3.612 1.209 0 1.901-.056 2.794-.139-.941-.751-1.85-1.698-2.621-2.775z" />
               </svg>
               <div>
                 <p className="text-sm text-gray-400">Instagram</p>
-                <h5 className="text-white">username</h5>
+                <h5 className="text-white">random_handle</h5>
               </div>
-              <a href="https://instagram.com/heet._.18" target="_blank" rel="noopener noreferrer" className="ml-auto text-purple-400 hover:text-white transition-colors">Write Me</a>
+              <a href="https://instagram.com/random_handle" target="_blank" rel="noopener noreferrer" className="ml-auto text-purple-400 hover:text-white transition-colors">Write Me</a>
             </div>
           </div>
         </motion.div>
@@ -69,14 +96,16 @@ function Contact() {
           className=""
         >
           <h4 className="text-lg font-semibold text-white mb-4">Write me your message</h4>
-          <form className="space-y-6">
+          <form ref={form} onSubmit={sendEmail} className="space-y-6">
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
                 Name
               </label>
               <input
                 type="text"
+                name="user_name"
                 id="name"
+                required
                 className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
                 placeholder="Your name"
               />
@@ -87,7 +116,9 @@ function Contact() {
               </label>
               <input
                 type="email"
+                name="user_email"
                 id="email"
+                required
                 className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
                 placeholder="random.email123@example.com"
               />
@@ -97,18 +128,27 @@ function Contact() {
                 Message
               </label>
               <textarea
+                name="message"
                 id="message"
                 rows="4"
+                required
                 className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
                 placeholder="Your message"
               ></textarea>
             </div>
             <button
               type="submit"
-              className="w-full px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
+              disabled={status === 'sending'}
+              className="w-full px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors disabled:opacity-50"
             >
-              Send Message
+              {status === 'sending' ? 'Sending...' : 'Send Message'}
             </button>
+            {status === 'success' && (
+              <p className="text-green-400 text-center">Message sent successfully!</p>
+            )}
+            {status === 'error' && (
+              <p className="text-red-400 text-center">Failed to send message. Please try again.</p>
+            )}
           </form>
         </motion.div>
       </div>
@@ -116,4 +156,4 @@ function Contact() {
   );
 }
 
-export default Contact; 
+export default Contact;

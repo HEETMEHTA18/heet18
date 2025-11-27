@@ -91,14 +91,14 @@ function Navbar() {
 function BottomNavigation() {
   const [activeSection, setActiveSection] = useState("home");
   const [indicatorProps, setIndicatorProps] = useState({ left: 0, width: 0 });
-  const btnRefs = useRef({}); // <-- useRef here!
+  const btnRefs = useRef({});
 
   const navItems = [
-    { name: "Home", id: "home", icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg> }, // Home Icon
-    { name: "About", id: "about", icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg> }, // About Icon (User)
-    { name: "Skills", id: "skills", icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-0.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg> }, // Skills Icon (Clipboard/List)
-    { name: "Projects", id: "projects", icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.566 23.566 0 0112 15c-3.179 0-6.22-.582-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg> }, // Projects Icon (Briefcase)
-    { name: "Contact", id: "contact", icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-1 13a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h12a2 2 0 012 2v15z" /></svg> }, // Contact Icon (Envelope)
+    { name: "Home", id: "home", icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg> },
+    { name: "About", id: "about", icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg> },
+    { name: "Skills", id: "skills", icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-0.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg> },
+    { name: "Projects", id: "projects", icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.566 23.566 0 0112 15c-3.179 0-6.22-.582-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg> },
+    { name: "Contact", id: "contact", icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-1 13a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h12a2 2 0 012 2v15z" /></svg> },
   ];
 
   // Update indicator position when activeSection changes
@@ -119,34 +119,38 @@ function BottomNavigation() {
   };
 
   return (
-    <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 bg-gray-900/90 backdrop-blur-sm rounded-full border border-gray-800 px-6 py-3">
-      <div className="relative flex justify-around items-center h-full w-full">
-        {/* Animated indicator */}
-        <motion.div
-          className="absolute top-1/2 left-0 h-12 bg-purple-600/90 rounded-full shadow-lg shadow-purple-600/40 -translate-y-1/2"
-          animate={{
-            width: indicatorProps.width,
-            left: indicatorProps.left,
-          }}
-          transition={{ type: "spring", stiffness: 400, damping: 30 }}
-        />
-        {navItems.map((item) => {
-          if (!btnRefs.current[item.id]) btnRefs.current[item.id] = React.createRef();
-          return (
-            <button
-              key={item.id}
-              ref={btnRefs.current[item.id]}
-              onClick={() => scrollToSection(item.id)}
-              className={`relative flex flex-col items-center text-xs transition-colors px-4 py-2 rounded-full z-10 ${
-                activeSection === item.id
-                  ? "text-white"
-                  : "text-gray-400 hover:text-white"
-              }`}
-            >
-              <span className="mb-1">{item.icon}</span>
-            </button>
-          );
-        })}
+    <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50">
+      <div className="bg-white/20 dark:bg-black/20 backdrop-blur-2xl border border-white/30 dark:border-white/10 rounded-full px-2 py-2 shadow-2xl ring-1 ring-black/5">
+        <div className="relative flex items-center">
+          {/* Animated indicator */}
+          <motion.div
+            className="absolute top-0 bottom-0 bg-white/80 dark:bg-gray-700/80 rounded-full shadow-sm backdrop-blur-sm"
+            animate={{
+              width: indicatorProps.width,
+              left: indicatorProps.left,
+            }}
+            transition={{ type: "spring", stiffness: 500, damping: 30 }}
+          />
+          {navItems.map((item) => {
+            if (!btnRefs.current[item.id]) btnRefs.current[item.id] = React.createRef();
+            const isActive = activeSection === item.id;
+            return (
+              <button
+                key={item.id}
+                ref={btnRefs.current[item.id]}
+                onClick={() => scrollToSection(item.id)}
+                className={`relative flex flex-col items-center justify-center w-12 h-12 rounded-full transition-all duration-300 z-10 ${isActive
+                    ? "text-black dark:text-white scale-110"
+                    : "text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white"
+                  }`}
+              >
+                <span className="transform transition-transform duration-300">
+                  {item.icon}
+                </span>
+              </button>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

@@ -4,19 +4,64 @@ import { motion } from 'framer-motion';
 function Projects() {
   const projects = [
     {
-      title: "Solar System Project",
-      image: "/placeholder-solar-system.jpg",
-      link: "https://github.com/heetmehta18/solar_system_project"
+      title: "Coding-Bingo-Platform",
+      image: "/coding-bingo.png",
+      link: "https://github.com/HEETMEHTA18/Coding-Bingo-Platform",
+      description: "Multiplayer coding games for developers & teams"
     },
     {
-      title: "WeatherSphere",
-      image: "/weather-sphere-screenshot.jpg",
-      link: "https://github.com/heetmehta18/weatherSphere"
+      title: "Coastal-Guardian",
+      image: "/coastal-guardian.png",
+      link: "https://github.com/HEETMEHTA18/Coastal-Guardian",
+      description: "AI-powered platform for real-time coastal threat assessment"
+    },
+    {
+      title: "Web-Dev-Framework",
+      image: "/web-dev-framework.png",
+      link: "https://github.com/HEETMEHTA18/Web-Dev-Framework",
+      description: "Repository for web development students"
+    },
+    {
+      title: "CheckMate",
+      image: "/checkmate.png",
+      link: "https://github.com/HEETMEHTA18/CheckMate",
+      description: "Maths based document verification system"
+    },
+    {
+      title: "Animation.io",
+      image: "/animation-io.png",
+      link: "https://github.com/HEETMEHTA18/Animation.io",
+      description: "Web Animations Collection"
+    },
+    {
+      title: "Sasta-Shark-Tank",
+      image: "/sasta-shark-tank.png",
+      link: "https://github.com/HEETMEHTA18/Sasta-Shark-Tank",
+      description: "Interactive project for pitching business ideas"
     },
     {
       title: "Smart Traffic Light System",
       image: "/smart-traffic-light-screenshot.jpg",
-      link: "https://github.com/heetmehta18/Smart-Traffic-Light-System-With-Adaptive-Siganal"
+      link: "https://github.com/HEETMEHTA18/Smart-Traffic-Light-System-With-Adaptive-Siganal",
+      description: "Smart Traffic Light Control System with ESP32"
+    },
+    {
+      title: "solar_system_project",
+      image: "/placeholder-solar-system.jpg",
+      link: "https://github.com/HEETMEHTA18/solar_system_project",
+      description: "Simulation of the solar system"
+    },
+    {
+      title: "weatherSphere",
+      image: "/weather-sphere-screenshot.jpg",
+      link: "https://github.com/HEETMEHTA18/weatherSphere",
+      description: "Responsive weather forecasting website"
+    },
+    {
+      title: "jobHive_Frontend",
+      image: "/jobhive.png",
+      link: "https://github.com/HEETMEHTA18/jobHive_Frontend",
+      description: "Frontend for JobHive"
     }
   ];
 
@@ -49,7 +94,7 @@ function Projects() {
             className="bg-gray-800/50 rounded-lg overflow-hidden group"
           >
             <div className="relative overflow-hidden">
-              <img 
+              <img
                 src={project.image}
                 alt={project.title}
                 className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
@@ -74,6 +119,9 @@ function Projects() {
             </div>
             <div className="p-4 text-center">
               <h3 className="text-lg font-semibold text-white">{project.title}</h3>
+              {project.description && (
+                <p className="text-sm text-gray-400 mt-2 line-clamp-2">{project.description}</p>
+              )}
             </div>
           </motion.div>
         ))}
@@ -82,4 +130,4 @@ function Projects() {
   );
 }
 
-export default Projects; 
+export default Projects;
