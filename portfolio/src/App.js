@@ -81,12 +81,6 @@ function ScrollProgress() {
 //   );
 // }
 
-// Navbar
-function Navbar() {
-  // This top navbar is being removed as per the new design
-  return null;
-}
-
 // Bottom Navigation
 function BottomNavigation() {
   const [activeSection, setActiveSection] = useState("home");
@@ -156,15 +150,6 @@ function BottomNavigation() {
   );
 }
 
-function Section({ id, children }) {
-  return (
-    <section id={id} className="min-h-screen max-w-3xl mx-auto px-4 py-16 md:py-24">
-      {children}
-    </section>
-  );
-}
-
-
 // Loading component
 const LoadingSpinner = () => (
   <div className="flex items-center justify-center min-h-screen">
@@ -177,7 +162,7 @@ function AppContent() {
   const { theme } = useTheme();
 
   return (
-    <div className={`min-h-screen ${theme === 'dark' ? 'bg-black' : 'bg-gray-100'} font-sans ${theme}`}>
+    <div className={`min-h-screen font-sans ${theme === 'dark' ? 'bg-slate-950 text-slate-100' : 'bg-slate-50 text-slate-900'} ${theme}`}>
       <ScrollProgress />
       <TopNav />
       <Suspense fallback={<LoadingSpinner />}>
@@ -185,9 +170,13 @@ function AppContent() {
         <About />
         <MyExperience />
         <Projects />
-        <Contact />
+        <div className="pb-28 md:pb-0">
+          <Contact />
+        </div>
       </Suspense>
-      <BottomNavigation />
+      <div className="md:hidden">
+        <BottomNavigation />
+      </div>
       <Footer /> {/* Add Footer here */}
     </div>
   );

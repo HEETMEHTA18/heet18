@@ -14,6 +14,10 @@ export const ThemeProvider = ({ children }) => {
   // Save theme preference to local storage whenever it changes
   useEffect(() => {
     localStorage.setItem('theme', theme);
+    document.documentElement.classList.remove('light', 'dark');
+    document.documentElement.classList.add(theme);
+    document.body.classList.remove('light', 'dark');
+    document.body.classList.add(theme);
   }, [theme]);
 
   const toggleTheme = () => {

@@ -1,14 +1,17 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTheme } from '../contexts/ThemeContext';
 
 function About() {
+  const { theme } = useTheme();
+
   return (
     <section id="about" className="min-h-screen max-w-3xl mx-auto px-4 py-16 md:py-24">
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="text-2xl sm:text-3xl font-semibold mb-8 text-center text-gray-800 dark:text-white"
+        className={`text-2xl sm:text-3xl font-semibold mb-8 text-center ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`}
       >
         About Me
       </motion.h2>
@@ -17,7 +20,7 @@ function About() {
           initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          className="w-48 h-64 bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden flex-shrink-0"
+          className={`w-48 h-64 rounded-lg overflow-hidden flex-shrink-0 border ${theme === 'dark' ? 'bg-gray-700 border-white/10' : 'bg-white border-slate-200 shadow-lg'}`}
         >
           <img 
             src="/my-photo.jpg" 
@@ -35,49 +38,49 @@ function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="bg-gray-100 dark:bg-gray-800/50 p-4 rounded-lg text-center"
+              className={`p-4 rounded-lg text-center border ${theme === 'dark' ? 'bg-gray-800/50 border-white/10' : 'bg-white border-slate-200 shadow-sm'}`}
             >
-              <div className="text-purple-600 dark:text-purple-400 mb-2">
+              <div className={`${theme === 'dark' ? 'text-purple-400' : 'text-blue-600'} mb-2`}>
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M12 15h.01" />
                 </svg>
               </div>
-              <h3 className="text-sm font-semibold text-gray-800 dark:text-white">Experience</h3>
-              <p className="text-xs text-gray-600 dark:text-gray-400">Learning Technologies</p>
+              <h3 className={`text-sm font-semibold ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`}>Experience</h3>
+              <p className={`text-xs ${theme === 'dark' ? 'text-gray-400' : 'text-slate-600'}`}>Learning Technologies</p>
                </motion.div>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="bg-gray-100 dark:bg-gray-800/50 p-4 rounded-lg text-center"
+              className={`p-4 rounded-lg text-center border ${theme === 'dark' ? 'bg-gray-800/50 border-white/10' : 'bg-white border-slate-200 shadow-sm'}`}
             >
-              <div className="text-purple-600 dark:text-purple-400 mb-2">
+              <div className={`${theme === 'dark' ? 'text-purple-400' : 'text-blue-600'} mb-2`}>
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
               </div>
-              <h3 className="text-sm font-semibold text-gray-800 dark:text-white">Completed</h3>
-              <p className="text-xs text-gray-600 dark:text-gray-400">2+ Projects</p>
-            </motion.div>
+              <h3 className={`text-sm font-semibold ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`}>Completed</h3>
+              <p className={`text-xs ${theme === 'dark' ? 'text-gray-400' : 'text-slate-600'}`}>2+ Projects</p>
+            </motion.div> 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3 }}
-              className="bg-gray-100 dark:bg-gray-800/50 p-4 rounded-lg text-center"
+              className={`p-4 rounded-lg text-center border ${theme === 'dark' ? 'bg-gray-800/50 border-white/10' : 'bg-white border-slate-200 shadow-sm'}`}
             >
-              <div className="text-purple-600 dark:text-purple-400 mb-2">
+              <div className={`${theme === 'dark' ? 'text-purple-400' : 'text-blue-600'} mb-2`}>
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 5.636l-3.536 3.536m0 0a5 5 0 11-7.072 7.072m7.072-7.072L5.636 18.364m0 0L12 12m0 0l7.072 7.072M12 12L5.636 5.636" />
                 </svg>
               </div>
-              <h3 className="text-sm font-semibold text-gray-800 dark:text-white">Contact</h3>
-              <p className="text-xs text-gray-600 dark:text-gray-400">Online 24/7</p>
+              <h3 className={`text-sm font-semibold ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`}>Contact</h3>
+              <p className={`text-xs ${theme === 'dark' ? 'text-gray-400' : 'text-slate-600'}`}>Online 24/7</p>
             </motion.div>
           </div>
           <motion.p
-            className="space-y-4 text-gray-700 dark:text-gray-300 mb-6 text-base sm:text-lg"
+            className={`space-y-4 mb-6 text-base sm:text-lg ${theme === 'dark' ? 'text-gray-300' : 'text-slate-700'}`}
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}

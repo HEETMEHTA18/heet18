@@ -37,12 +37,3 @@ function TypewriterText({ text, className }) {
 }
 
 export default TypewriterText;
-
-<img 
-  src="/my-photo.webp" // use a compressed WebP version
-  alt="Heet Mehta" 
-  className="w-full h-full object-cover"
-  loading="lazy"
-  width="192"
-  height="256"
-/>

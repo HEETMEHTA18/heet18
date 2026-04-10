@@ -5,10 +5,11 @@
 @layer base {
   html {
     @apply antialiased;
+    scroll-behavior: smooth;
   }
   
   body {
-    @apply font-sans;
+    @apply font-sans bg-slate-950 text-slate-100;
   }
 
   /* Dark mode styles */
@@ -18,7 +19,39 @@
 
   /* Light mode styles */
   .light {
-    @apply bg-white text-gray-900;
+    @apply bg-white text-slate-900;
+  }
+
+  .light .text-white {
+    @apply text-slate-900;
+  }
+
+  .light .text-gray-300,
+  .light .text-gray-400,
+  .light .text-gray-500,
+  .light .text-gray-600,
+  .light .text-gray-700 {
+    @apply text-slate-700;
+  }
+
+  .light .bg-gray-900,
+  .light .bg-gray-800,
+  .light .bg-gray-700 {
+    @apply bg-white;
+  }
+
+  .light .bg-gray-900\/90,
+  .light .bg-gray-900\/80,
+  .light .bg-gray-800\/50,
+  .light .bg-gray-800\/60,
+  .light .bg-gray-700\/50 {
+    @apply bg-white;
+  }
+
+  .light .border-gray-800,
+  .light .border-gray-700,
+  .light .border-gray-600 {
+    @apply border-slate-200;
   }
 
   /* Typography styles */
@@ -28,6 +61,10 @@
 
   p {
     @apply font-sans font-normal leading-relaxed;
+  }
+
+  ::selection {
+    @apply bg-purple-500/30 text-white;
   }
 
   /* Ensure proper contrast for links */
