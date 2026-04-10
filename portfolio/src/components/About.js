@@ -4,6 +4,7 @@ import { useTheme } from '../contexts/ThemeContext';
 
 function About() {
   const { theme } = useTheme();
+  const profileImage = `${process.env.PUBLIC_URL || ''}/my-photo.jpg`;
 
   return (
     <section id="about" className="min-h-screen max-w-3xl mx-auto px-4 py-16 md:py-24">
@@ -23,7 +24,7 @@ function About() {
           className={`w-48 h-64 rounded-lg overflow-hidden flex-shrink-0 border ${theme === 'dark' ? 'bg-gray-700 border-white/10' : 'bg-white border-slate-200 shadow-lg'}`}
         >
           <img 
-            src="/my-photo.jpg" 
+            src={profileImage} 
             alt="Heet Mehta" 
             className="w-full h-full object-cover"
             loading="lazy"
