@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 
 function Hero() {
+  const profileImage = `${process.env.PUBLIC_URL || ''}/my-photo.jpg`;
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   const handleMouseMove = (e) => {
@@ -145,7 +146,7 @@ function Hero() {
               transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
             >
               <img
-                src="/my-photo.jpg"
+                src={profileImage}
                 alt="Heet Mehta"
                 className="h-full w-full object-cover"
                 loading="lazy"

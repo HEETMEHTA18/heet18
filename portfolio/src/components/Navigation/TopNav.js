@@ -6,7 +6,7 @@ import { FiDownload, FiMenu, FiX } from 'react-icons/fi';
 function TopNav() {
   const { theme, toggleTheme } = useTheme();
   const [isOpen, setIsOpen] = React.useState(false);
-  const resumePath = '/resume.pdf';
+  const resumePath = `${process.env.PUBLIC_URL || ''}/resume.pdf`;
 
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
