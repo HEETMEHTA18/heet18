@@ -86,17 +86,10 @@ function About() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            Hi, I'm Heet Mehta : A passionate developer with a keen interest in building smart, real-world tech solutions. From IoT innovations to interactive web apps, I love turning ideas into impactful digital experiences. Always curious, always learning
+            Hi, I'm Heet Mehta : A  developer with a keen interest in building smart, real-world  solutions. From IoT innovations to interactive web apps, Love turning ideas into impactful digital experiences. Always curious, always learning ready to collaborate and create something amazing together! 
           </motion.p>
-          <motion.button
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
-          >
-            Contact Me
-            
-          </motion.button>
+        
+        
         </div>
       </div>
     </section>
