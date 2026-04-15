@@ -3,6 +3,7 @@ import { motion, useScroll, useSpring } from "framer-motion";
 import { ThemeProvider, useTheme } from './contexts/ThemeContext';
 import TopNav from './components/Navigation/TopNav';
 import Footer from './components/Footer';
+import PortfolioSignature from './components/PortfolioSignature';
 
 // Lazy load components
 const Hero = lazy(() => import('./components/Hero'));
@@ -157,12 +158,46 @@ const LoadingSpinner = () => (
   </div>
 );
 
+function AmbientBackground({ theme }) {
+  const darkTheme = theme === 'dark';
+
+  return (
+    <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+      <div
+        className={`absolute inset-0 ${
+          darkTheme
+            ? 'bg-[radial-gradient(circle_at_top,_rgba(59,130,246,0.16),_transparent_28%),radial-gradient(circle_at_80%_20%,_rgba(168,85,247,0.14),_transparent_22%),radial-gradient(circle_at_bottom,_rgba(14,165,233,0.1),_transparent_28%),linear-gradient(180deg,#020617_0%,#020617_55%,#000000_100%)]'
+            : 'bg-[radial-gradient(circle_at_top,_rgba(59,130,246,0.10),_transparent_30%),radial-gradient(circle_at_80%_20%,_rgba(168,85,247,0.08),_transparent_22%),linear-gradient(180deg,#f8fafc_0%,#eef2ff_100%)]'
+        }`}
+      />
+      <div
+        className={`absolute inset-0 ${
+          darkTheme
+            ? 'bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] opacity-25'
+            : 'bg-[linear-gradient(rgba(15,23,42,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(15,23,42,0.03)_1px,transparent_1px)] opacity-30'
+        } bg-[size:48px_48px]`}
+      />
+      <div
+        className={`absolute left-[10%] top-28 h-56 w-56 rounded-full blur-3xl ${
+          darkTheme ? 'bg-blue-500/10' : 'bg-blue-400/10'
+        }`}
+      />
+      <div
+        className={`absolute bottom-24 right-[8%] h-72 w-72 rounded-full blur-3xl ${
+          darkTheme ? 'bg-purple-500/10' : 'bg-purple-400/10'
+        }`}
+      />
+    </div>
+  );
+}
+
 // New component to wrap content that uses theme context
 function AppContent() {
   const { theme } = useTheme();
 
   return (
-    <div className={`min-h-screen font-sans ${theme === 'dark' ? 'bg-slate-950 text-slate-100' : 'bg-slate-50 text-slate-900'} ${theme}`}>
+    <div className={`relative min-h-screen font-sans ${theme === 'dark' ? 'bg-slate-950 text-slate-100' : 'bg-slate-50 text-slate-900'} ${theme}`}>
+      <AmbientBackground theme={theme} />
       <ScrollProgress />
       <TopNav />
       <Suspense fallback={<LoadingSpinner />}>
@@ -173,6 +208,7 @@ function AppContent() {
         <div className="pb-28 md:pb-0">
           <Contact />
         </div>
+        <PortfolioSignature />
       </Suspense>
       <div className="md:hidden">
         <BottomNavigation />
