@@ -140,7 +140,11 @@ export function CursorDrivenParticleTypography({
 
       ctx.clearRect(0, 0, containerWidth, containerHeight);
 
-      const effectiveFontSize = Math.min(fontSize, containerWidth * 0.22);
+      const effectiveFontSize = Math.min(
+        fontSize,
+        containerWidth * 0.22,
+        containerHeight * 0.62
+      );
       ctx.fillStyle = textColor;
       ctx.font = `bold ${effectiveFontSize}px ${fontFamily}`;
       ctx.textAlign = "center";
@@ -191,10 +195,26 @@ export function CursorDrivenParticleTypography({
       animationFrameId = window.requestAnimationFrame(animate);
     };
 
-    const handleMouseMove = (event) => {
+    const updatePointerPosition = (clientX, clientY) => {
       const rect = canvas.getBoundingClientRect();
-      mouseX = event.clientX - rect.left;
-      mouseY = event.clientY - rect.top;
+      mouseX = clientX - rect.left;
+      mouseY = clientY - rect.top;
+    };
+
+    const handleMouseMove = (event) => {
+      updatePointerPosition(event.clientX, event.clientY);
+    };
+
+    const handleTouchMove = (event) => {
+      const touch = event.touches[0];
+      if (!touch) return;
+      updatePointerPosition(touch.clientX, touch.clientY);
+    };
+
+    const handleTouchStart = (event) => {
+      const touch = event.touches[0];
+      if (!touch) return;
+      updatePointerPosition(touch.clientX, touch.clientY);
     };
 
     const handleMouseLeave = () => {
@@ -238,6 +258,10 @@ export function CursorDrivenParticleTypography({
 
     canvas.addEventListener("mousemove", handleMouseMove);
     canvas.addEventListener("mouseleave", handleMouseLeave);
+    canvas.addEventListener("touchstart", handleTouchStart, { passive: true });
+    canvas.addEventListener("touchmove", handleTouchMove, { passive: true });
+    canvas.addEventListener("touchend", handleMouseLeave);
+    canvas.addEventListener("touchcancel", handleMouseLeave);
 
     return () => {
       window.clearTimeout(timeoutId);
@@ -247,6 +271,10 @@ export function CursorDrivenParticleTypography({
       resizeObserver.disconnect();
       canvas.removeEventListener("mousemove", handleMouseMove);
       canvas.removeEventListener("mouseleave", handleMouseLeave);
+      canvas.removeEventListener("touchstart", handleTouchStart);
+      canvas.removeEventListener("touchmove", handleTouchMove);
+      canvas.removeEventListener("touchend", handleMouseLeave);
+      canvas.removeEventListener("touchcancel", handleMouseLeave);
       window.cancelAnimationFrame(animationFrameId);
     };
   }, [
