@@ -119,7 +119,7 @@ function TopNav() {
         ))}
         <motion.a
           href={resumePath}
-          download="Heet-Mehta-Resume.pdf"
+          download="resume.pdf"
           className="w-full mt-4 flex items-center justify-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-semibold transition-colors"
           whileHover={{ scale: 1.05 }}
         >
