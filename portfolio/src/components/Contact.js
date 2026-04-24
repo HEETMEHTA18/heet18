@@ -1,12 +1,10 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiMail, FiPhone, FiInstagram, FiCheck, FiAlertCircle, FiCopy } from 'react-icons/fi';
-import emailjs from '@emailjs/browser';
 import { useTheme } from '../contexts/ThemeContext';
 
 function Contact() {
   const { theme } = useTheme();
-  const form = useRef();
   const [status, setStatus] = useState('');
   const [formData, setFormData] = useState({ user_name: '', user_email: '', message: '' });
 
@@ -14,33 +12,16 @@ function Contact() {
     e.preventDefault();
     setStatus('sending');
 
-    const SERVICE_ID = 'YOUR_SERVICE_ID';
-    const TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
-    const PUBLIC_KEY = 'YOUR_PUBLIC_KEY';
+    const subject = encodeURIComponent(`Portfolio Contact from ${formData.user_name || 'Visitor'}`);
+    const body = encodeURIComponent(
+      `Name: ${formData.user_name}\nEmail: ${formData.user_email}\n\nMessage:\n${formData.message}`
+    );
 
-    // Check if credentials are still default - show success anyway (fallback mode)
-    if (SERVICE_ID === 'YOUR_SERVICE_ID') {
-      setTimeout(() => {
-        setStatus('success');
-        setFormData({ user_name: '', user_email: '', message: '' });
-        form.current.reset();
-        setTimeout(() => setStatus(''), 3000);
-      }, 1000);
-      return;
-    }
+    window.location.href = `mailto:heetmehta18125@gmail.com?subject=${subject}&body=${body}`;
 
-    emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form.current, PUBLIC_KEY)
-      .then((result) => {
-        console.log(result.text);
-        setStatus('success');
-        setFormData({ user_name: '', user_email: '', message: '' });
-        form.current.reset();
-        setTimeout(() => setStatus(''), 3000);
-      }, (error) => {
-        console.log(error.text);
-        setStatus('error');
-        setTimeout(() => setStatus(''), 3000);
-      });
+    setStatus('success');
+    setFormData({ user_name: '', user_email: '', message: '' });
+    setTimeout(() => setStatus(''), 3000);
   };
 
   const copyToClipboard = () => {
@@ -48,11 +29,6 @@ function Contact() {
     navigator.clipboard.writeText(text);
     setStatus('copied');
     setTimeout(() => setStatus(''), 2000);
-  };
-
-  const sendViaEmail = () => {
-    const body = `Name: ${formData.user_name}%0AEmail: ${formData.user_email}%0A%0AMessage:%0A${formData.message}`;
-    window.location.href = `mailto:heetmehta18125@gmail.com?subject=Portfolio Contact from ${formData.user_name}&body=${body}`;
   };
 
   const contactMethods = [
@@ -155,7 +131,7 @@ function Contact() {
           transition={{ delay: 0.2 }}
         >
           <h3 className={`text-2xl font-bold mb-8 ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`}>Send me a message</h3>
-          <form ref={form} onSubmit={sendEmail} className="space-y-6">
+          <form onSubmit={sendEmail} className="space-y-6">
             {/* Name field */}
             <motion.div
               initial={{ opacity: 0, y: 10 }}
@@ -276,16 +252,6 @@ function Contact() {
                   <FiCopy size={16} />
                   Copy Message
                 </motion.button>
-                <motion.button
-                  type="button"
-                  onClick={sendViaEmail}
-                  className={`flex-1 px-4 py-2 rounded-xl text-sm font-medium flex items-center justify-center gap-2 transition-all ${theme === 'dark' ? 'bg-white/10 hover:bg-white/15 text-white' : 'bg-slate-100 hover:bg-slate-200 text-slate-900'}`}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <FiMail size={16} />
-                  Email Me
-                </motion.button>
               </motion.div>
             )}
 
@@ -299,7 +265,7 @@ function Contact() {
                   className="flex items-center gap-3 p-4 bg-green-500/10 border border-green-500/30 rounded-lg"
                 >
                   <FiCheck className="text-green-400" size={20} />
-                  <p className="text-green-400 font-medium">Message received! I'll get back to you soon. 🎉</p>
+                  <p className="text-green-400 font-medium">Your email app opened with the message prefilled for heetmehta18125@gmail.com.</p>
                 </motion.div>
               )}
               {status === 'copied' && (
@@ -331,7 +297,7 @@ function Contact() {
 
             {/* Help text */}
             <p className={`text-xs text-center ${theme === 'dark' ? 'text-gray-500' : 'text-slate-500'}`}>
-              💡 Can't submit? Try copying your message or using the Email Me button above.
+              💡 Submit opens your email app with the message addressed to heetmehta18125@gmail.com.
             </p>
           </form>
         </motion.div>
